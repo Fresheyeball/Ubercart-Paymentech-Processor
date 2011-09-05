@@ -6,7 +6,7 @@
  * Process payments using Chase Paymentech Orbital gateway
  * Right now this module only supports auth/capture
  * May add auth before capture and post auth capture
- * as well as recurring billing if there is demand.
+ * as well as recurring billing if there is demand. 
  */
 
 /*******************************************************************************
@@ -70,7 +70,7 @@ function uc_paymentech_charge($order_id, $amount, $data){
   
         $ptprocessor = new PaymentechProcessor();
         
-        switch(strtolower($params('credit_card_type')){
+        switch( strtolower( $params( 'credit_card_type' ))){
         case 'visa':
             $cc_type = CCTYPE_VISA;
         case 'mastercard':
@@ -120,14 +120,14 @@ function uc_paymentech_charge($order_id, $amount, $data){
                     'data' => array('module' => 'uc_paymentech', 'txn_type' => 'auth-capture', 'txn_id' => $ptprocessor->tx_ref_num),
                     'uid' => $user->uid,
                 );
-
+  	}
         // Build an admin order comment.
         $context = array(
         'revision' => 'formatted-original',
         'location' => 'paymentech-charge-comment',
         );
-        $comment = t('<b>@type</b><br /><b>@status:</b> @message<br />Amount: @amount',
-        array('@type' => 'auth-capture', '@status' => $result['success'] ? t('ACCEPTED') : t('REJECTED'), '@message' => $ptprocessor->transactionMsg, '@amount' => uc_price($amount);
+        $comment = t( '<b>@type</b><br /><b>@status:</b> @message<br />Amount: @amount', 
+						array( '@type' => 'auth-capture', '@status' => $result['success'] ? t('ACCEPTED') : t('REJECTED'), '@message' => $ptprocessor->transactionMsg, '@amount' => uc_price($amount) ) );
 
 
         // Save the comment to the order.
